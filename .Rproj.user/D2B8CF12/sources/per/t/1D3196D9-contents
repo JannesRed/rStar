@@ -1,0 +1,171 @@
+#------------------------------------------------------------------------------
+# File:        get.data.fredr.R
+#
+# Description: function that generates datasets for a country or list of
+#             countries from fredr
+#------------------------------------------------------------------------------#
+
+# load require libaries and install if necessary
+if (!require("fredr")) {install.packages("fredr"); library("fredr")} # install FRED API
+if (!require("seasonal")) {install.packages("seasonal"); library('seasonal')} # Set up seasonal adjustment
+if (!require("tsbox")) {install.packages("tsbox"); library('tsbox')}
+if (!require("tis")) {install.packages("tis"); library('tis')}
+if (!require("dplyr")) {install.packages("dplyr"); library('dplyr')}
+if (!require("tbl2xts")) {install.packages("tbl2xts"); library('tbl2xts')}
+
+fredr_api_key <- "10acdc32992f3a578defe6feb2a21cdf"
+country <- c("Nigeria")
+input_folder = "data/"
+
+get_data(country, fredr_api_key, input_folder)
+
+
+get_data <- function(country, fredr_key, input_folder) {
+  #------------------------------------------------------------------------------#
+  # Set fredr
+  #------------------------------------------------------------------------------#
+  
+  fredr_set_key(fredr_key) 
+  
+  #------------------------------------------------------------------------------#
+  # Set loop for all countries
+  #------------------------------------------------------------------------------#
+  for (country in country){
+  
+    #------------------------------------------------------------------------------#
+    # Get GDP data 
+    # these should be quarterly and seasonally adjusted
+    #------------------------------------------------------------------------------#
+    
+    gdp.metadata <- 
+      fredr_series_search_text(
+        search_text = paste0("Gross Domestic Product by Expenditure in Constant Prices: Total Gross Domestic Product", " ", country),
+        filter_variable = "frequency",
+        filter_value = "Quarterly",
+        order_by = "popularity",
+        sort_order = "desc",
+        limit = 6
+        )
+    gdp.metadata <- gdp.metadata[which(gdp.metadata$units == "Index 2010=100"),]
+    try(if(nrow(gdp.metadata)==0) stop(paste0("No data on GDP on FRED for ", country)))
+    
+    gdp.log <- 
+      gdp.metadata %>%
+      pull(id) %>%
+      fredr(series_id = .) %>% 
+      rename(gdp.log = value) %>% 
+      dplyr::select("date", "gdp.log") %>% 
+      mutate(gdp.log = log(gdp.log))
+      
+    
+    #------------------------------------------------------------------------------#
+    # Get Interest rates
+    # these should be quarterly and seasonally adjusted
+    #------------------------------------------------------------------------------#
+    interest.rate.metadata <- 
+      fredr_series_search_text(
+                  search_text = paste0(country, " ", "central bank rate"),
+                  filter_variable = "frequency",
+                  filter_value = "Quarterly", 
+                  order_by = "popularity",
+                  sort_order = "desc",
+                  limit = 1
+                  )
+    try(if(nrow(interest.rate.metadata)==0) stop(paste0("No data on interest rates on FRED for ", country)))
+    
+    interest.rate <- 
+      interest.rate.metadata %>% 
+      pull(id) %>%
+      fredr(series_id = .) %>% 
+      rename(interest.rate = value) %>% 
+      dplyr::select("date", "interest.rate")
+    
+    #------------------------------------------------------------------------------#
+    # Get price indexes
+    # these should be quarterly and seasonally adjusted
+    #------------------------------------------------------------------------------#
+    price.index.metadata <- 
+      fredr_series_search_text(search_text = paste0(country, " ", "consumer price index"),
+      filter_variable = c("frequency"),
+      filter_value = "Quarterly",
+      order_by = "popularity",
+      sort_order = "desc",
+      limit = 1)
+    try(if(nrow(price.index.metadata)==0) stop(paste0("No data on CPI on FRED for ", country)))
+    
+
+    if (price.index.metadata["seasonal_adjustment_short"] == "NSA") {
+      price.index.data <-
+        price.index.metadata %>%
+        pull(id) %>%
+        fredr(series_id = .) %>%
+        rename(price.index = value) %>%
+        dplyr::select("date", "price.index")
+
+      # get start date from data
+      data.start.quarter <- as.numeric(substr(price.index.data$date[1], 6, 7))
+      data.start.year <- as.numeric(substr(price.index.data$date[1], 1, 4))
+      data.start <- c(data.start.year, data.start.quarter)
+
+      # get end date from data
+      data.end.quarter <- as.numeric(substr(price.index.data$date[length(price.index.data$date)], 6, 7))
+      data.end.year <- as.numeric(substr(price.index.data$date[length(price.index.data$date)], 1, 4))
+      sample.end   <- c(data.end.year, data.end.quarter)
+
+      # seasonally adjust the price index
+      price.index.data <- ts(price.index.data$price.index, start=data.start, end=sample.end, frequency = 4)
+      price.index.data <- ts_xts(final(seas(price.index.data)))
+      price.index.data <-
+        xts_tbl(price.index.data) %>%
+        rename(price.index = value)
+
+
+    } else {
+
+      price.index.data <- 
+        price.index.metadata %>%
+        pull(id) %>%
+        fredr(series_id = .) %>% 
+        rename(price.index = value) %>% 
+        dplyr::select("date", "price.index")
+    }
+    
+    
+    #create inflation series from price index
+    inflation <-
+      price.index.data %>%
+      mutate(inflation = ((price.index/lag(price.index))^4-1)*100) %>% 
+      dplyr::select("date", "inflation")
+    
+    
+    # Inflation expectations measure: 4-quarter moving average of past inflation
+    inflation.expectations <-
+      inflation %>% 
+      mutate(inflation.expectations = (
+        inflation + lag(inflation, n=1) +
+        lag(inflation, n=2) + 
+        lag(inflation, n=3))/4) %>% 
+      dplyr::select("date", "inflation.expectations")
+    
+    
+    
+    output_data <- merge(inflation, interest.rate, by  = "date") 
+    output_data <- merge(output_data, gdp.log, by = "date")
+    output_data <- merge(output_data, inflation.expectations, by = "date")
+    output_data <- output_data[-1:-4,]
+    
+    # create a metadata table
+    metadata <- rbind(gdp.metadata, interest.rate.metadata, price.index.metadata)
+      
+    #output data file for each country
+    write.table(output_data, file = paste0(input_folder, "input/", country, ".data.csv"), sep = ',',
+                col.names = TRUE, quote = FALSE, na = 'NA', row.names = FALSE)
+    
+    
+    # output metadata file for each country
+    write.table(metadata, file = paste0(input_folder, "metadata/", country, ".metadata.csv"), sep = ',',
+                col.names = TRUE, quote = FALSE, na = 'NA', row.names = FALSE)
+    write.csv(metadata, file = paste0(input_folder, "metadata/", country, ".metadata.csv"), na = "NA" )
+    }
+    
+}

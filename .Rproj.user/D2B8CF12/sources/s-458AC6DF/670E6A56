@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1539253890526.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1951575360",
+    "id" : "670E6A56",
+    "lastKnownWriteTime" : 1539256311,
+    "last_content_update" : 1539256311257,
+    "path" : "~/GitHub/rStar/README.Rmd",
+    "project_path" : "README.Rmd",
+    "properties" : {
+        "cursorPosition" : "68,20",
+        "scrollLine" : "53"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

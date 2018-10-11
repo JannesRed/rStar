@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538743573354.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2937690225",
+    "id" : "1D3196D9",
+    "lastKnownWriteTime" : 1538744749,
+    "last_content_update" : 1538744749791,
+    "path" : "~/GitHub/rStar/get.data.fredr.R",
+    "project_path" : "get.data.fredr.R",
+    "properties" : {
+        "cursorPosition" : "15,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

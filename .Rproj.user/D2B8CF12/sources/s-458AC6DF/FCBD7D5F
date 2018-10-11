@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1539201674802.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2054782754",
+    "id" : "FCBD7D5F",
+    "lastKnownWriteTime" : 1539256318,
+    "last_content_update" : 1539256318627,
+    "path" : "~/GitHub/rStar/R/get.SA.data.R",
+    "project_path" : "R/get.SA.data.R",
+    "properties" : {
+        "cursorPosition" : "12,44",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

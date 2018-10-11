@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"README\"\noutput: html_document\n---\n\nThis folder contains the code from the authors of the LW paper.\n\nThis README is intended to discuss and explore the code and its application to SA data.",
+    "created" : 1503990620016.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2528495326",
+    "id" : "7E4C6F8C",
+    "lastKnownWriteTime" : 1503990663,
+    "last_content_update" : 1503990663423,
+    "path" : "D:/Research/Fin Metrics Projects 2017/Angus/Code/HLW_Code/README.Rmd",
+    "project_path" : "README.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

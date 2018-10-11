@@ -1,0 +1,8 @@
+---
+title: "README"
+output: html_document
+---
+
+This folder contains the code from the authors of the LW paper.
+
+This README is intended to discuss and explore the code and its application to SA data.
