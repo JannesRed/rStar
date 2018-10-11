@@ -7,7 +7,11 @@
 \title{Holsten, Laubach, and Williams estimation of rStar}
 \description{
 Contains one function that estimates the natural rate of interest and the output gap.
-Saves these estimates to a specified folder
+Saves these estimates to a specified folder.
+}
+\details{
+Also contains supplementary functions that create datasets based on newest data published
+on the St.Louis Fed website (FRED)
 }
 \author{
 Jannes Reddig \email{jreddig1@gmail.com}
