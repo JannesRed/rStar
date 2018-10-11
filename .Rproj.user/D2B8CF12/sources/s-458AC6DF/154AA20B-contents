@@ -22,15 +22,6 @@ Imports:
   stats, 
   utils,
   seasonal
-Depends: 
-  tis,
-  mFilter,
-  nloptr,
-  tools,
-  lubridate,
-  tidyverse,
-  stats, 
-  utils,
-  seasonal
+
 
 
