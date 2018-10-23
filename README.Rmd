@@ -34,6 +34,17 @@ Should you not already have a version of mFilter installed, then you might have 
 ```{r}
 install.packages("C:/Users/xxx/xxx/mFilter_0.1-3.tar.gz", repos = NULL, type = "source")
 ```
+## Dependencies
+
+*  lubridate
+*  mFilter
+*  nloptr
+*  seasonal
+*  stats
+*  tidyverse
+*  tis
+*  tools
+*  utils
 
 # Functions
 
