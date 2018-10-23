@@ -139,9 +139,19 @@ hlw_nri <- function(input_file,
                             estimation$out.stage3$z.filtered,
                             estimation$out.stage3$output.gap.filtered)
 
+  # Two-sided (smoothed) estimates
+  two.sided.est <- cbind(estimation$out.stage3$rstar.smoothed,
+                         estimation$out.stage3$trend.smoothed,
+                         estimation$out.stage3$z.smoothed,
+                         estimation$out.stage3$output.gap.smoothed)
+
   # Save one-sided estimates to CSV
   #------------------------ change url to dynamically change
   write.table(one.sided.est, paste0(output_folder, 'one.sided.est.', country_name, '.csv'), row.names = FALSE, col.names = c("rstar","g","z","output gap"), quote = FALSE, sep = ',', na = ".")
+
+  # Save two-sided estimates to CSV
+  #------------------------ change url to dynamically change
+  write.table(two.sided.est, paste0(output_folder, 'two.sided.est.', country_name, '.csv'), row.names = FALSE, col.names = c("rstar","g","z","output gap"), quote = FALSE, sep = ',', na = ".")
 
   # Save output to CSV
   #------------------------ change url to dynamically change
