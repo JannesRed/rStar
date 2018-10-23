@@ -5,8 +5,8 @@
 #' Saves these estimates to a specified folder.
 #'
 #' Also contains supplementary functions that create datasets based on newest data published
-#' on the St.Louis Fed website (FRED)
-#'
+#' on the St.Louis Fed website (FRED). These are available for the United States and South Africa
+#' at the moment.
 #'
 #' @docType package
 #' @author Jannes Reddig \email{jreddig1@gmail.com}
