@@ -4,7 +4,7 @@ Title: Natural Rate of Interest
 Version: 0.1.0
 Author: Jannes Reddig
 Maintainer: Jannes Reddig <jreddig1@gmail.com>
-Description: rStar calculates the natural rate of interest based on the Holsten-Laubach-Williams technique Holsten, Laubach, and Williams (2017).
+Description: rStar calculates the natural rate of interest based on the Holsten-Laubach-Williams technique
 License: DO NOT DISTRIBUTE
 Encoding: UTF-8
 LazyData: true
@@ -19,4 +19,12 @@ Imports:
   tis,
   tools,
   utils
-  
+Depends: 
+  lubridate,
+  mFilter,
+  seasonal,
+  stats, 
+  tidyverse,
+  tis,
+  tools,
+  utils  

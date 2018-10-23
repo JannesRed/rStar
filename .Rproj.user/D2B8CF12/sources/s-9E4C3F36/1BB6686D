@@ -7,13 +7,13 @@
     "folds" : "",
     "hash" : "0",
     "id" : "1BB6686D",
-    "lastKnownWriteTime" : 1540329158,
-    "last_content_update" : 1540329158765,
+    "lastKnownWriteTime" : 1540329695,
+    "last_content_update" : 1540329695661,
     "path" : "~/GitHub/rStar/DESCRIPTION",
     "project_path" : "DESCRIPTION",
     "properties" : {
-        "cursorPosition" : "20,7",
-        "scrollLine" : "7"
+        "cursorPosition" : "23,10",
+        "scrollLine" : "15"
     },
     "relative_order" : 6,
     "source_on_save" : false,
