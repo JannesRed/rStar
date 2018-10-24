@@ -5,7 +5,7 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "4242004386",
+    "hash" : "0",
     "id" : "98883483",
     "lastKnownWriteTime" : 1539034667,
     "last_content_update" : 1539034667,
@@ -13,7 +13,7 @@
     "project_path" : "R/rstar.stage3.R",
     "properties" : {
         "cursorPosition" : "96,30",
-        "scrollLine" : "114"
+        "scrollLine" : "0"
     },
     "relative_order" : 8,
     "source_on_save" : false,

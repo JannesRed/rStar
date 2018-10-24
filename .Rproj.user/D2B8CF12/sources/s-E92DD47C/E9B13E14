@@ -5,7 +5,7 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2254714845",
+    "hash" : "0",
     "id" : "E9B13E14",
     "lastKnownWriteTime" : 1540330239,
     "last_content_update" : 1540330239724,
@@ -13,7 +13,7 @@
     "project_path" : "R/run.hlw.R",
     "properties" : {
         "cursorPosition" : "153,55",
-        "scrollLine" : "140"
+        "scrollLine" : "0"
     },
     "relative_order" : 7,
     "source_on_save" : false,
