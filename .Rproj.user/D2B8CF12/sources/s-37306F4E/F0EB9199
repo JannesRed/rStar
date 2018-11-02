@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541156712675.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F0EB9199",
+    "lastKnownWriteTime" : 1541156744,
+    "last_content_update" : 1541156744069,
+    "path" : "~/GitHub/rStar/R/kalman.standard.errors.R",
+    "project_path" : "R/kalman.standard.errors.R",
+    "properties" : {
+        "cursorPosition" : "70,17",
+        "scrollLine" : "62"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

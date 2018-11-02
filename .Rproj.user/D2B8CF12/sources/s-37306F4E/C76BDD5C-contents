@@ -106,7 +106,7 @@ rstar.stage3 <- function(log.output,
       ptm <- proc.time()
       se <- kalman.standard.errors(T, states, theta, y.data, x.data, stage, lambda.g, lambda.z, xi.00, P.00, niter, a3.constraint, b2.constraint)
       message("Standard error procedure run time")
-      message(proc.time() - ptm)
+      print(proc.time() - ptm)
   }
 
   # One-sided (filtered) estimates

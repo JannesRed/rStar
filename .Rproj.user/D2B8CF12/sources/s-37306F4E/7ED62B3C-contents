@@ -1,0 +1,18 @@
+citHeader("To cite reports in publications, please use:")
+
+
+citEntry(entry = "Manual",
+    title = "{rStar}: {P}ackage to estimate Holsten-Laubach-Williams Natural Rate               of Interest",
+    author = "J.A. Reddig",
+    note = "version 0.1.0",
+    year = "2018",
+    url = "https://github.com/JannesRed/rStar",
+    textVersion  = paste("Reddig, J. A. (2018).",
+        "rStar: Package to estimate Holsten-Laubach-Williams Natural Rate of               Interest",
+        "version 0.1.0.",
+        "https://github.com/JannesRed/rStar")
+)
+
+
+
+

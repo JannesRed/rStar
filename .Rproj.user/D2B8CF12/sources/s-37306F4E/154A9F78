@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541156571040.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "154A9F78",
+    "lastKnownWriteTime" : 1541156580,
+    "last_content_update" : 1541156580288,
+    "path" : "~/GitHub/rStar/R/median.unbiased.estimator.stage2.R",
+    "project_path" : "R/median.unbiased.estimator.stage2.R",
+    "properties" : {
+        "cursorPosition" : "82,19",
+        "scrollLine" : "77"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541157142139.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "485613280",
+    "id" : "F048A9CA",
+    "lastKnownWriteTime" : 1541157156,
+    "last_content_update" : 1541157156146,
+    "path" : "~/GitHub/rStar/R/rstar.stage3.R",
+    "project_path" : "R/rstar.stage3.R",
+    "properties" : {
+        "cursorPosition" : "108,13",
+        "scrollLine" : "103"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

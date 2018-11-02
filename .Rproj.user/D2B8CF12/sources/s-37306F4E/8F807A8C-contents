@@ -9,7 +9,7 @@
 kalman.standard.errors <- function(T, states, theta, y.data, x.data, stage,
                                    lambda.g, lambda.z, xi.00, P.00, niter = niter,
                                    a3.constraint=NA, b2.constraint=NA) {
-    message('Computing Standard Errors')
+    print('Computing Standard Errors')
 
     # Set a3.constraint to -0.0025 if a constraint is not specified in stage 3
     if (is.na(a3.constraint)) {
@@ -20,11 +20,11 @@ kalman.standard.errors <- function(T, states, theta, y.data, x.data, stage,
         b2.constraint <- 0.025
     }
 
-    message("Standard Error Procedure: a3.constraint")
-    message(a3.constraint)
+    print("Standard Error Procedure: a3.constraint")
+    print(a3.constraint)
 
-    message("Standard Error Procedure: b2.constraint")
-    message(b2.constraint)
+    print("Standard Error Procedure: b2.constraint")
+    print(b2.constraint)
 
     n.params <- length(theta)
     n.state.vars <- length(xi.00)
