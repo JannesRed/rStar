@@ -1,6 +1,6 @@
-#' Get South African data for estimation procedure
+#' Get US data for estimation procedure
 #'
-#' Downloads SA data from FRED website and saves as a dataframe
+#' Downloads US data from FRED website and saves as a dataframe
 #' funtion takes 2 arguments - the output folder and filename
 #' @param folder the csv to perform the HLW estimation on. Please see elp file for required column names
 #' @param file a string for the country you are performing the estimates on - this is used in the output file name
@@ -8,9 +8,9 @@
 #' folder <-  "data/inputData/"         # output folder
 #' file <-  "rstar.data.us.csv"     # output filename
 #'
-#' get.SA.data(folder = folder, file = file)
+#' get.US.data(folder = folder, file = file)
 #' @export
-get.SA.data <- function(folder = "data/input/" , file ="rstar.data.sa.csv") {
+get.US.data <- function(folder = "data/input/" , file ="rstar.data.us.csv") {
   # Import data using the function getFRED() in utilities.R
   # If the connection does not work, try the old URL:
   # "https://research.stlouisfed.org/fred2/data/NAME.txt"
@@ -20,10 +20,10 @@ get.SA.data <- function(folder = "data/input/" , file ="rstar.data.sa.csv") {
   data.start.quarter <- 1
 
 
-  gdp             <- getFRED('https://fred.stlouisfed.org/data/NAEXKP01ZAQ661S.txt')
-  price.index     <- getFRED('https://fred.stlouisfed.org/data/ZAFCPIALLMINMEI.txt')
-  interest.rate   <- getFRED('https://fred.stlouisfed.org/data/IRSTCB01ZAM156N.txt')
-  #discount.rate   <- getFRED("https://fred.stlouisfed.org/data/IRSTCB01ZAM156N.txt")
+  gdp             <- getFRED('https://fred.stlouisfed.org/data/GDPC1.txt')
+  price.index     <- getFRED('https://fred.stlouisfed.org/data/PCEPILFE.txt')
+  ny.discount     <- getFRED('https://fred.stlouisfed.org/data/INTDSRUSM193N.txt')
+  fed.funds       <- getFRED('https://fred.stlouisfed.org/data/FEDFUNDS.txt')
 
   #------------------------------------------------------------------------------#
   # Prepare Data
@@ -32,18 +32,19 @@ get.SA.data <- function(folder = "data/input/" , file ="rstar.data.sa.csv") {
   # Take log of real GDP
   gdp.log <- log(gdp)
 
-  # Create an annualized seasonally adjusted inflation series using the price index
-  cpi.back.start <- c(1960,1)
-  price.index <- final(seas(as.ts(naWindow(price.index),freq=4)))
-  price.index  <- as.tis(price.index,start=cpi.back.start,tif='monthly')
-
+  # Create an annualized inflation series using the price index
   inflation <- 400*log(price.index/Lag(price.index, k=1))
 
   # Inflation expectations measure: 4-quarter moving average of past inflation
-  inflation.expectations <- (inflation + lag(inflation, n=1) + lag(inflation, n=2) + lag(inflation, n=3))/4
+  inflation.expectations <- (inflation + Lag(inflation, k=1) + Lag(inflation, k=2) + Lag(inflation, k=3))/4
 
-  # express discount rate on 365 day basis
-  interest.rate <- 100*((1+interest.rate/36000)^365 -1)
+  # Express interest rate data on a 365-day basis
+  ny.discount.eff <- 100*((1+ny.discount/36000)^365 -1)
+  fed.funds.eff   <- 100*((1+fed.funds/36000)^365 -1)
+
+  # NY Fed discount rate is used prior to 1965; thereafter, use the effective federal funds rate
+  interest.rate <- mergeSeries(window(ny.discount.eff, end = c(1964,4)),window(fed.funds.eff, start = c(1965,1)))
+
   #------------------------------------------------------------------------------#
   # Output Data
   #------------------------------------------------------------------------------#
@@ -58,12 +59,11 @@ get.SA.data <- function(folder = "data/input/" , file ="rstar.data.sa.csv") {
                " to ", data.end.year, " Q", data.end.quarter)
 
   # create date column sequence
-  date <- seq(from = (as.Date(ti(shiftQuarter(data.start,3),'quarterly'))+1),
-              to = (as.Date(ti(shiftQuarter(data.end,-1),tif='quarterly'))+1),
-              by = 'quarter')
+  date <- seq(from = (as.Date(ti(shiftQuarter(data.start,-1),'quarterly'))+1),
+                      to = (as.Date(ti(shiftQuarter(data.end,-1),tif='quarterly'))+1),
+                      by = 'quarter')
   # merge time series into a dataframe
-  data.out <- data_t
-  data.out <- data.out[-1:-4,]
+  data.out <- (window(cbind(gdp.log, inflation, inflation.expectations, interest.rate), start = data.start, end = data.end))
   data.out <- cbind(date, as.data.frame(data.out))
   write.table(data.out, file = paste0(folder, file), sep = ',',
               col.names = TRUE, quote = FALSE, na = '.', row.names = FALSE)

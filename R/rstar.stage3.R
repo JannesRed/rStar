@@ -14,7 +14,7 @@ rstar.stage3 <- function(log.output,
                          run.se = TRUE,
                          g.pot.start.index = g.pot.start.index,
                          niter = niter) {
-  print("Running rstar.stage3...")
+  message("Running rstar.stage3...")
   stage <- 3
 
   # Data must start 4 quarters before the estimation period
@@ -69,7 +69,7 @@ rstar.stage3 <- function(log.output,
   # Set a lower bound for the Phillips curve slope (b_2) of b2.constraint, if not NA
   # In HLW, b2.constraint = 0.025
   if (!is.na(b2.constraint)) {
-      print(paste0("Setting a lower bound on b_2 of ",as.character(b2.constraint)))
+      message("Setting a lower bound on b_2 of ", as.character(b2.constraint))
       if (initial.parameters[5] < b2.constraint) {
           initial.parameters[5] <- b2.constraint
       }
@@ -79,7 +79,7 @@ rstar.stage3 <- function(log.output,
   # Set an upper bound for the IS curve slope (a_3) of a3.constraint, if not NA
   # In HLW, a3.constraint = -0.0025
   if (!is.na(a3.constraint)) {
-      print(paste0("Setting an upper bound on a_3 of ",as.character(a3.constraint)))
+      message("Setting an upper bound on a_3 of ", as.character(a3.constraint))
       if (initial.parameters[3] > a3.constraint) {
           initial.parameters[3] <- a3.constraint
       }
@@ -105,7 +105,7 @@ rstar.stage3 <- function(log.output,
   if (run.se) {
       ptm <- proc.time()
       se <- kalman.standard.errors(T, states, theta, y.data, x.data, stage, lambda.g, lambda.z, xi.00, P.00, niter, a3.constraint, b2.constraint)
-      print("Standard error procedure run time")
+      message("Standard error procedure run time")
       print(proc.time() - ptm)
   }
 

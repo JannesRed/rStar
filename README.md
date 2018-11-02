@@ -56,12 +56,15 @@ These are the functions that are currently available:
 
 These are simple, just specify the folder and file path for output. They have sensible defaults for when you are working in a project - just make sure to create a folder called "inputData" when using the defaults. 
 
+For the US there is an additional option to specify alternate output measures. The user has the option to chose between real GDP and real GDP per capita. Unfortunately, South Africa does not publish quarterly per capita GDP.
+
 ### defaults
 
 ```{r}
 #for US
 folder = "data/input/"
 file ="rstar.data.us.csv" 
+pcGDP = FALSE
 
 #for SA
 folder = "data/input/"
@@ -79,13 +82,13 @@ get.SA.data(folder = folder, file = file)
 # for US
 folder = "data/input/"
 file ="rstar.data.us.csv" 
-get.US.data(folder = folder, file = file)
+get.US.data(folder = folder, file = file, pcGDP = FALSE)
 ```
 
 ### Example 2
 
 ```{r}
-# when using default folder and file 
+# when using default folder, file, and output measure
 # just make sure you have a "data/inputData/" folder structure from 
 # your project root if using this approach
 get.US.data()

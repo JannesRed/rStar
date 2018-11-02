@@ -45,18 +45,18 @@ hlw_nri <- function(input_file,
   # perform data quality checks
   #-------------------------------------------------------------------------
   # minimum quarters is 98 otherwise singular matrices occur
-  print("Checking that data is at least 98 quarters...")
+  message("Checking that data is at least 98 quarters...")
   if (nrow(data) < 98) {
-    print(paste0("Your data is of length ", nrow(data),
-                 " please make sure it spans at least 98 quarters for the estimation to run."))
+    message("Your data is of length ", nrow(data),
+                 " please make sure it spans at least 98 quarters for the estimation to run.")
     stop("You should get a longer sample period")
   } else {
-    print(paste0("Data is of length ", nrow(data), " continuing to estimation precedure"))
+    message("Data is of length ", nrow(data), " continuing to estimation precedure")
   }
 
   # zeros or NAs break the code
-  print("Please check yourself that the data doesn't contain non-sensible zeros...")
-  print("Checking that data does not contain illegal values...")
+  message("Please check yourself that the data doesn't contain non-sensible zeros...")
+  message("Checking that data does not contain illegal values...")
   for (data_column in c(2,3,4,5)) {
     if (sum(is.na(data[data_column]))>5) {
       stop(paste0(colnames(data[data_column])), " contains ", sum(data[data_column]), " NAs")
@@ -67,9 +67,9 @@ hlw_nri <- function(input_file,
   }
 
   # provide additional info
-  if(run.se == TRUE) {print("Running with standard error calculations")}
-  if(run.se == FALSE) {print("Running without standard error calculations")}
-  print(paste0("Iterations for Monte Carlo simulation are set to: ", niter, ". Default is 5000."))
+  if(run.se == TRUE) {message("Running with standard error calculations")}
+  if(run.se == FALSE) {message("Running without standard error calculations")}
+  message("Iterations for Monte Carlo simulation are set to: ", niter, ". Default is 5000.")
 
   # Automatically set the start and end dates of the estimation sample
   #------------------------------------------------------------------------------
@@ -85,9 +85,9 @@ hlw_nri <- function(input_file,
   data.end.year <- as.numeric(year(data$date[length(data$date)]))
   sample.end   <- c(data.end.year, data.end.quarter)
 
-  print(paste0("Data starts in ", data.start.year, " quarter ", data.start.quarter))
-  print("Sample starts 4 quarters after data start")
-  print(paste0("Data ends in ", data.end.year, " quarter ", data.end.quarter ))
+  message("Data starts in ", data.start.year, " quarter ", data.start.quarter)
+  message("Sample starts 4 quarters after data start")
+  message("Data ends in ", data.end.year, " quarter ", data.end.quarter )
 
   #------------------------------------------------------------------------------#
   # Define variables
@@ -157,5 +157,5 @@ hlw_nri <- function(input_file,
   #------------------------ change url to dynamically change
   output <- format.output(estimation, one.sided.est, real.interest.rate, sample.start, sample.end, run.se = run.se, niter = niter)
   write.table(output, paste0(output_folder, 'output.', country_name, '.csv'), col.names = output.col.names, quote=FALSE, row.names=FALSE, sep = ',', na = '')
-  print(paste0("Done. You can find the output in: ", output_folder))
+  message("Done. You can find the output in: ", output_folder)
 }

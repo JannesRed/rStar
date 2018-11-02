@@ -7,7 +7,7 @@
 run.hlw.estimation <- function(log.output, inflation, real.interest.rate, nominal.interest.rate,
                                a3.constraint = NA, b2.constraint = NA, run.se = TRUE,
                                g.pot.start.index = g.pot.start.index, niter = niter) {
-    print("Running RUN.HLW.ESTIMATION...")
+    message("Running HLW ESTIMATION...")
     # Running the stage 1 model
     out.stage1 <- rstar.stage1(log.output,
                                inflation,

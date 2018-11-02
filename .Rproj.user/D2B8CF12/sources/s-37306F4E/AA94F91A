@@ -7,16 +7,16 @@
     "folds" : "",
     "hash" : "0",
     "id" : "AA94F91A",
-    "lastKnownWriteTime" : 1540329314,
-    "last_content_update" : 1540329314895,
-    "path" : "~/GitHub/rStar/README.Rmd",
-    "project_path" : "README.Rmd",
+    "lastKnownWriteTime" : 1541148916,
+    "last_content_update" : 1541148916092,
+    "path" : "~/GitHub/rStar/README.md",
+    "project_path" : "README.md",
     "properties" : {
-        "cursorPosition" : "37,0",
-        "scrollLine" : "0"
+        "cursorPosition" : "145,6",
+        "scrollLine" : "136"
     },
     "relative_order" : 6,
     "source_on_save" : false,
     "source_window" : "",
-    "type" : "r_markdown"
+    "type" : "markdown"
 }

@@ -4,20 +4,25 @@
 \alias{get.US.data}
 \title{Get US data for estimation procedure}
 \usage{
-get.US.data(folder = "data/input/", file = "rstar.data.us.csv")
+get.US.data(folder = "data/input/", file = "rstar.data.us.csv",
+  pcGDP = FALSE)
 }
 \arguments{
 \item{folder}{the csv to perform the HLW estimation on. Please see elp file for required column names}
 
 \item{file}{a string for the country you are performing the estimates on - this is used in the output file name}
+
+\item{pcGDP}{logical. (default) FALSE uses real GDP, TRUE uses real GDP per capita}
 }
 \description{
 Downloads US data from FRED website and saves as a dataframe
-funtion takes 2 arguments - the output folder and filename
+funtion takes 3 arguments - the output folder, filename, and an option to chose between output
+specifications.
 }
 \examples{
-folder <-  "data/inputData/"         # output folder
+folder <-  "data/inputData/"     # output folder
 file <-  "rstar.data.us.csv"     # output filename
+pcGDP <- FALSE                   # False uses real GDP, true uses real GDP per capita
 
 get.US.data(folder = folder, file = file)
 }

@@ -5,7 +5,6 @@
 #' specifications.
 #' @param folder the csv to perform the HLW estimation on. Please see elp file for required column names
 #' @param file a string for the country you are performing the estimates on - this is used in the output file name
-#' @param pcGDP logical. (default) FALSE uses real GDP, TRUE uses real GDP per capita
 #' @examples
 #' folder <-  "data/inputData/"     # output folder
 #' file <-  "rstar.data.us.csv"     # output filename
