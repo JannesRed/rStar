@@ -33,7 +33,7 @@ get.US.data <- function(folder = "data/input/" , file ="rstar.data.us.csv", pcGD
 
 
   price.index     <- getFRED('https://fred.stlouisfed.org/data/PCEPILFE.txt')
-  ny.discount     <- getFRED('https://fred.stlouisfed.org/data/INTDSRUSM193N.txt')
+  #ny.discount     <- getFRED('https://fred.stlouisfed.org/data/INTDSRUSM193N.txt')
   fed.funds       <- getFRED('https://fred.stlouisfed.org/data/FEDFUNDS.txt')
 
   #------------------------------------------------------------------------------#
@@ -50,12 +50,12 @@ get.US.data <- function(folder = "data/input/" , file ="rstar.data.us.csv", pcGD
   inflation.expectations <- (inflation + Lag(inflation, k=1) + Lag(inflation, k=2) + Lag(inflation, k=3))/4
 
   # Express interest rate data on a 365-day basis
-  ny.discount.eff <- 100*((1+ny.discount/36000)^365 -1)
+  #ny.discount.eff <- 100*((1+ny.discount/36000)^365 -1)
   fed.funds.eff   <- 100*((1+fed.funds/36000)^365 -1)
 
   # NY Fed discount rate is used prior to 1965; thereafter, use the effective federal funds rate
-  interest.rate <- mergeSeries(window(ny.discount.eff, end = c(1964,4)),window(fed.funds.eff, start = c(1965,1)))
-
+  #interest.rate <- mergeSeries(window(ny.discount.eff, end = c(1964,4)),window(fed.funds.eff, start = c(1965,1)))
+  interest.rate <- fed.funds.eff
   #------------------------------------------------------------------------------#
   # Output Data
   #------------------------------------------------------------------------------#
